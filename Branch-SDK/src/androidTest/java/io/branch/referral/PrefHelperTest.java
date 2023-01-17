@@ -204,4 +204,9 @@ public class PrefHelperTest extends BranchTest {
         String result = prefHelper.getAppStoreSource();
         Assert.assertEquals(Defines.Jsonkey.Google_Play_Store.getKey(), result);
     }
+
+    @Test
+    public void testNewPassingTest(){
+        Assert.assertTrue(true);
+    }
 }
