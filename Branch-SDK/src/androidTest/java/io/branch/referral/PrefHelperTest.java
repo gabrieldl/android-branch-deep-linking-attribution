@@ -208,5 +208,6 @@ public class PrefHelperTest extends BranchTest {
     @Test
     public void testNewPassingTest(){
         Assert.assertTrue(true);
+        Assert.assertTrue(true);
     }
 }
