@@ -14,10 +14,9 @@ jobs:
       with:
         github-token: ${{ secrets.GHA_WORKFLOW_TRIGGER  }}
         script: |
-          const result = await github.rest.actions.createWorkflowDispatch({
+          result = await github.rest.actions.createWorkflowDispatch({
             owner: 'gabrieldl',
             repo: 'appium-github-actions-integration',
             workflow_id: 'appium.yml',
             ref: 'master'
           })
-          console.log(result)
