@@ -6,18 +6,18 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
-  jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/github-script@v6
-      with:
-        github-token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
-        script: |
-          const result = await github.rest.actions.createWorkflowDispatch({
-            owner: 'gabrieldl',
-            repo: 'appium-github-actions-integration',
-            workflow_id: 'appium.yml',
-            ref: 'master'
-          })
-          console.log(result)
+jobs:
+build:
+  runs-on: ubuntu-latest
+  steps:
+  - uses: actions/github-script@v6
+    with:
+      github-token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
+      script: |
+        const result = await github.rest.actions.createWorkflowDispatch({
+          owner: 'gabrieldl',
+          repo: 'appium-github-actions-integration',
+          workflow_id: 'appium.yml',
+          ref: 'master'
+        })
+        console.log(result)
