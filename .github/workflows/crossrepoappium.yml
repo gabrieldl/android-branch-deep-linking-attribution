@@ -17,7 +17,7 @@ jobs:
          github_token: ${{ secrets.GHA_WORKFLOW_TRIGGER }}
          github_user: gabrieldl
          workflow_file_name: appium.yml
-         ref: release-branch
+         ref: master
          wait_interval: 10
          client_payload: '{}'
          propagate_failure: true
