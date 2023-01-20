@@ -534,6 +534,9 @@ public class Branch implements BranchViewHandler.IBranchViewEvents, SystemObserv
         }
     }
 
+    private void emptyMethod(){
+    }
+
     public BranchRemoteInterface getBranchRemoteInterface() {
         return branchRemoteInterface_;
     }
