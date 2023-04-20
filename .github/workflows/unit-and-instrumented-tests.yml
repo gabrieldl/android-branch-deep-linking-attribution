@@ -22,7 +22,7 @@ jobs:
           echo "Starting emulator and waiting for boot to complete...."
           ls -la $ANDROID_HOME/emulator
           nohup $ANDROID_HOME/tools/emulator -avd test -gpu host -no-audio -no-boot-anim -camera-back none -camera-front none -qemu -m 2048 2>&1 &
-          $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do echo "wait..."; sleep 1; done; input keyevent 82'
+          $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do echo "waiting..."; sleep 1; done; input keyevent 82'
           echo "Emulator has finished booting"
 
       - name: setup java 11 for gradle
@@ -32,4 +32,4 @@ jobs:
           java-version: '11'
       - name: Run test
         run: |
-          ./gradlew connectedCheck --info
+          ./gradlew :Branch-SDK:connectedDebugAndroidTest -Dorg.gradle.jvmargs="-Xmx8192M -Dkotlin.daemon.jvm.options\\=\"-Xmx8192M\"" --stacktrace --debug
