@@ -14,12 +14,13 @@ jobs:
       - name: Create Android emulator
         run: |
           yes | sudo ~/Library/Android/sdk/tools/bin/sdkmanager --licenses
+          $ANDROID_HOME/tools/bin/sdkmanager --version
           $ANDROID_HOME/tools/bin/sdkmanager --list
           $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-33;google_apis;x86_64"
           echo "no" | $ANDROID_HOME/tools/bin/avdmanager --verbose create avd --force --name test --abi google_apis/x86_64 --package 'system-images;android-33;google_apis;x86_64'
       - name: Launch Emulator
         run: |
-          $ANDROID_SDK_ROOT/emulator/emulator -avd test -gpu guest
+          $ANDROID_SDK_ROOT/emulator/emulator -avd test -gpu host
       - name: setup java 11 for gradle
         uses: actions/setup-java@v3
         with:
