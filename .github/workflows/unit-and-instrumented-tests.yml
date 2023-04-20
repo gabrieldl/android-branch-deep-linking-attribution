@@ -21,7 +21,7 @@ jobs:
       - name: Launch Emulator
         run: |
           ln -s ~/Library/Android/sdk/emulator/lib64 ~/Library/Android/sdk/emulator/qemu/darwin-x86_64/lib64
-          echo "no" | $ANDROID_HOME/emulator/emulator "-avd" "test" "-no-audio" "-no-boot-anim" &
+          echo "no" | $ANDROID_HOME/emulator/emulator "-avd" "test" "-wipe-data" "-no-audio" "-no-boot-anim"
 
       - name: setup java 11 for gradle
         uses: actions/setup-java@v3
