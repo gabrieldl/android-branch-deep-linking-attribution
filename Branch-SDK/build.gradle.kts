@@ -234,3 +234,14 @@ tasks.withType<Test> {
         events("standardOut", "started", "passed", "skipped", "failed")
     }
 }
+
+tasks.withType(Test) {
+    testLogging {
+        events "standardOut", "started", "passed", "skipped", "failed"
+    }
+}
+
+test {
+    testLogging.showStandardStreams = true
+    testLogging.exceptionFormat = 'full'
+}
