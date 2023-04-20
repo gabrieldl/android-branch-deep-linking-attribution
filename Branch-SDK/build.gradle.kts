@@ -230,12 +230,7 @@ publishing {
 }
 
 tasks.withType<Test> {
-    testLogging {
-        events("standardOut", "started", "passed", "skipped", "failed")
+    this.testLogging {
+        this.showStandardStreams = true
     }
-}
-
-test {
-    testLogging.showStandardStreams = true
-    testLogging.exceptionFormat = 'full'
 }
