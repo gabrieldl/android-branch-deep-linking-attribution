@@ -1,12 +1,9 @@
 import java.util.Properties
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-
+import org.gradle.api.tasks.testing.logging.*
 
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("jvm")
     `maven-publish`
     signing
 }
@@ -234,27 +231,16 @@ publishing {
 }
 
 tasks {
-
-    test {
-
-        useJUnitPlatform()
-
-        addTestListener(object : TestListener {
-            override fun beforeSuite(suite: TestDescriptor) {}
-            override fun beforeTest(testDescriptor: TestDescriptor) {}
-            override fun afterTest(testDescriptor: TestDescriptor, result: TestResult) {}
-
-            override fun afterSuite(suite: TestDescriptor, result: TestResult) {
-                if (suite.parent == null) { // root suite
-                    logger.info("----")
-                    logger.info("Test result: ${result.resultType}")
-                    logger.info("Test summary: ${result.testCount} tests, " +
-                        "${result.successfulTestCount} succeeded, " +
-                        "${result.failedTestCount} failed, " +
-                        "${result.skippedTestCount} skipped")
-
-                }
-            }
-        })
+    withType<Test> {
+        testLogging {
+            exceptionFormat = TestExceptionFormat.FULL
+            events = setOf(
+                TestLogEvent.STARTED,
+                TestLogEvent.SKIPPED,
+                TestLogEvent.PASSED,
+                TestLogEvent.FAILED,
+            )
+            showStandardStreams = true
+        }
     }
 }
