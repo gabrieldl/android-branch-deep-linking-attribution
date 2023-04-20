@@ -14,8 +14,6 @@ jobs:
       - name: Create Android emulator
         run: |
           yes | sudo ~/Library/Android/sdk/tools/bin/sdkmanager --licenses
-          which sdkmanager
-          which emulator
           $ANDROID_HOME/tools/bin/sdkmanager --version
           $ANDROID_HOME/tools/bin/sdkmanager --list
           $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-33;google_apis;x86_64"
