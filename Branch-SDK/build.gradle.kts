@@ -228,3 +228,9 @@ publishing {
         }
     }
 }
+
+tasks.withType<Test> {
+    testLogging {
+        events("standardOut", "started", "passed", "skipped", "failed")
+    }
+}
