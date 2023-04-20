@@ -16,6 +16,9 @@ jobs:
           java-version: '11'
       - name: Build with Gradle
         run: |
-          emulator -list-avds
-          emulator -avd TEST_AVD & adb wait-for-device
+          export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+          sdkmanager --install  "system-images;android-32;google_apis_playstore;x86_64"
+          echo "no" | avdmanager create avd -f -n test -k "system-images;android-32;google_apis;x86_64"
+          emulator -avd test & adb wait-for-device
+          export JAVA_HOME=`/usr/libexec/java_home -v 11`
           ./gradlew connectedCheck --info
