@@ -15,20 +15,11 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '11'
-    - name: Setup gradle
-      uses: gradle/gradle-build-action@v2    
-    - name: Create Android emulator
-      run: |
-        sdkmanager --install "system-images;android-31;google_apis;x86_64"
-        echo "no" | avdmanager --verbose create avd --force --name testAVD --abi google_apis/x86_64 --package 'system-images;android-31;google_apis;x86_64'
-        
-    - name: Copy jar files to app folder
-      run: gradle extractLibs
-
-    - name: Launch Emulator
-      run: | 
-        $ANDROID_SDK_ROOT/emulator/emulator -avd testAVD
-
-    - name: Run instrumentation tests
-      run: |                
-        gradle connectedAndroidTest --info
+      - name: run tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
+          arch: x86_64
+          profile: Nexus 5
+          script: ./gradlew connectedCheck --info
