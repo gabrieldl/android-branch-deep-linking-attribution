@@ -38,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: ./Branch-SDK/build/reports/androidTests/connected/index.html
+          path: ./Branch-SDK/build/reports/
