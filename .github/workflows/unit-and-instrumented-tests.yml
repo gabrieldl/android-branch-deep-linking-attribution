@@ -6,7 +6,7 @@ jobs:
     strategy:
       # using the earliest supported api, and latest
       matrix:
-        image: ["system-images;android-21;google_apis;x86_64", "system-images;android-UpsideDownCake;google_apis_playstore;x86_64"]
+        image: [system-images;android-21;google_apis;x86_64, system-images;android-UpsideDownCake;google_apis_playstore;x86_64]
     steps:
       - name: checkout
         uses: actions/checkout@v3
