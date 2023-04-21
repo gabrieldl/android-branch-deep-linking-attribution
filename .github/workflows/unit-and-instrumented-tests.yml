@@ -3,8 +3,10 @@ on: [push]
 jobs:
   test:
     runs-on: macos-latest
-    env:
-      IMAGE_CONFIGURATION: "system-images;android-UpsideDownCake;google_apis_playstore;x86_64"
+    strategy:
+      # using the earliest supported api, and latest
+      matrix:
+        image: ["system-images;android-21;google_apis;x86_64", "system-images;android-UpsideDownCake;google_apis_playstore;x86_64"]
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -12,8 +14,8 @@ jobs:
       - name: Create Android emulator
         run: |
           echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --licenses
-          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install $IMAGE_CONFIGURATION
-          echo "no" | $ANDROID_HOME/tools/bin/avdmanager --verbose create avd --force --name test --package $IMAGE_CONFIGURATION
+          echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install ${{ matrix.image }}
+          echo "no" | $ANDROID_HOME/tools/bin/avdmanager --verbose create avd --force --name test --package ${{ matrix.image }}
       # boots and waits for the emulator to be ready
       - name: Launch Emulator
         run: |
