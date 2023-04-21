@@ -4,7 +4,7 @@ jobs:
   test:
     runs-on: macos-latest
     env:
-      IMAGE_CONFIGURATION: "system-images;android-33;google_apis_playstore;x86_64"
+      IMAGE_CONFIGURATION: "system-images;android-UpsideDownCake;google_apis_playstore;x86_64"
     steps:
       - name: checkout
         uses: actions/checkout@v3
