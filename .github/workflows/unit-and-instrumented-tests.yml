@@ -8,12 +8,6 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
-      # the tools on the runner require java 8
-      - name: setup java 8 for android sdk tools 
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '8'
       # create an emulator with google apis and store
       - name: Create Android emulator
         run: |
