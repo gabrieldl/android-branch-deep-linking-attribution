@@ -6,7 +6,7 @@ jobs:
     strategy:
       # using the earliest supported api, and latest
       matrix:
-        androidSDK: [21, 33]
+        androidSDK: ["21", "33"]
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -14,7 +14,6 @@ jobs:
       - name: Create Android emulator
         run: |
           echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --licenses
-          $ANDROID_HOME/tools/bin/sdkmanager --list
           echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install "system-images;android-"${{ matrix.androidSDK }}";google_apis;x86_64"
           echo "no" | $ANDROID_HOME/tools/bin/avdmanager --verbose create avd --force --name test --package "system-images;android-"${{ matrix.androidSDK }}";google_apis;x86_64"
       # boots and waits for the emulator to be ready
